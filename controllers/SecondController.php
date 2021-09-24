@@ -30,7 +30,7 @@ class SecondController extends Controller
      * @param string $lastName Фамилия
      * @return string
      */
-    public function actionFio( $firstName,  $middleName, $lastName)
+    public function actionFio($firstName, $middleName, $lastName)
     {
         $data =
             $lastName
