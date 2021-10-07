@@ -17,15 +17,17 @@ class ArrayController extends Controller
         return $this->render('generate', compact("model"));
     }
 
-    public function actionSum(array $arr): string
+    public function actionSum($arr): string
     {
+        $arr = explode('|', $arr);
         $model = ArrayModel::WithArray($arr);
         $model->sum();
         return $this->render('generate', compact("model"));
     }
 
-    public function actionEdit(array $arr, int $power): string
+    public function actionEdit($arr, int $power): string
     {
+        $arr = explode('|', $arr);
         $model = ArrayModel::WithArray($arr);
         $model->power = $power;
         return $this->render('generate', compact('model'));

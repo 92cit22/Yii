@@ -29,11 +29,11 @@ $this->registerJsFile('/js/array/js.js');
     <?php if ($model->sum !== -1): ?>
         <?= "get sum: $model->sum" ?>
     <?php else: ?>
-        <?= Html::a("array sum", Url::toRoute(["array/sum", 'arr' => $model->arr])) ?>
+        <?= Html::a("array sum", Url::toRoute(["array/sum", 'arr' => implode('|', $model->arr)])) ?>
     <?php endif; ?>
 </p>
 <p>
     <?= Html::input('number', 'power', null, ['id' => 'inPower']) ?>
     <?php $powLink = Html::buttonInput('Edit') ?>
-    <?= Html::a($powLink, Url::toRoute(['array/edit', 'arr' => $model->arr, 'power' => 2])) ?>
+    <?= Html::a($powLink, Url::toRoute(['array/edit', 'arr' => implode('|', $model->arr), 'power' => 2])) ?>
 </p>

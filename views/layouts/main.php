@@ -55,7 +55,7 @@ AppAsset::register($this);
                 . '</li>'
             ),
             ['label' => 'Store', 'url' => ['/store/']],
-            ['label' => 'Array', 'url' => ['/array/generate/5/0/10']],
+            ['label' => 'Array', 'url' => ['/array/generate/5']],
         ],
     ]);
     NavBar::end();

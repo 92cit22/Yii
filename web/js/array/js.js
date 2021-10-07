@@ -1,7 +1,7 @@
 document.getElementById('inPower').addEventListener('input', function (e) {
     changeLink(
         document.querySelector("body > main > div > p:nth-child(5) > a"),
-        e, 3
+        e, 4
     )
 });
 document.getElementById('dimension').addEventListener('input', function (e) {
