@@ -43,16 +43,19 @@ $config = [
             ],
         ],
         'db' => $db,
-         'urlManager' => [
-             //'urlFormat' => 'path',
-             'showScriptName' => false,
-             'enablePrettyUrl' => true,
-             'rules' => [
-                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-             ],
-         ]
+        'urlManager' => [
+            //'urlFormat' => 'path',
+            'showScriptName' => false,
+            'enablePrettyUrl' => true,
+            'rules' => [
+                'array/generate/<N:\d+>/<min:\d+>/<max:\d+>' => 'array/index',
+                'array/sum/<arr>' => 'array/sum',
+                'array/edit/<power:\d+>/<arr>' => 'array/edit',
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+            ],
+        ]
     ],
     'params' => $params,
 ];
