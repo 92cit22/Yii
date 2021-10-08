@@ -51,7 +51,7 @@ $config = [
                 [
                     'pattern' => 'array/generate/<N:\d+>/<min:\d+>/<max:\d+>',
                     'route' => 'array/index',
-                    'defaults' => ['max' => 999, 'min' => 1],
+//                    'defaults' => ['min' => 1, 'max' => 999],
                 ],
                 'array/sum/<arr>' => 'array/sum',
                 'array/edit/<arr>/<power:\d+>' => 'array/edit',

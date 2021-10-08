@@ -22,8 +22,8 @@ $this->registerJsFile('/js/array/js.js');
     <?= Html::input('number', 'min', $model->min, ['id' => 'min']) ?>
     <?= Html::label('max', 'max') ?>
     <?= Html::input('number', 'max', $model->max, ['id' => 'max']) ?>
-    <?php $powLink = Html::buttonInput('Regenerate') ?>
-    <?= Html::a($powLink, ['array/index', 'N' => $model->getDimension(), 'max' => $model->getMax(), 'min' => $model->getMin()]) ?>
+    <?php $generateLink = Html::buttonInput('Regenerate') ?>
+    <?= Html::a($generateLink, ['array/index', 'N' => $model->getDimension(), 'max' => $model->getMax(), 'min' => $model->getMin()]) ?>
 </p>
 <p>
     <?php if ($model->sum !== -1): ?>
@@ -34,6 +34,6 @@ $this->registerJsFile('/js/array/js.js');
 </p>
 <p>
     <?= Html::input('number', 'power', null, ['id' => 'inPower']) ?>
-    <?php $powLink = Html::buttonInput('Edit') ?>
-    <?= Html::a($powLink, Url::toRoute(['array/edit', 'arr' => implode('|', $model->arr), 'power' => 2])) ?>
+    <?php $generateLink = Html::buttonInput('Edit') ?>
+    <?= Html::a($generateLink, Url::toRoute(['array/edit', 'arr' => implode('|', $model->arr), 'power' => 2])) ?>
 </p>

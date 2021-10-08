@@ -36,12 +36,12 @@ class ArrayModel extends Model
     {
         $instance = new self();
         $instance->arr = $arr;
-        if ($min) {
+        if ($min !== null) {
             $instance->min = $min;
         } else {
             $instance->min = min($arr);
         }
-        if ($max) {
+        if ($max !== null) {
             $instance->max = $max;
         } else {
             $instance->max = max($arr);

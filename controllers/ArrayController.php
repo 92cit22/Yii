@@ -11,7 +11,7 @@ class ArrayController extends Controller
     /**
      * @throws Exception if an appropriate source of randomness cannot be found.
      */
-    public function actionIndex(int $N, int $min, int $max): string
+    public function actionIndex(int $N, int $min = 1, int $max = 999): string
     {
         $model = ArrayModel::Generate($N, $min, $max);
         return $this->render('generate', compact("model"));
