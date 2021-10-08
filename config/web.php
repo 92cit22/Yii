@@ -9,7 +9,7 @@ $config = [
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
         'request' => [
@@ -43,16 +43,23 @@ $config = [
             ],
         ],
         'db' => $db,
-         'urlManager' => [
-             //'urlFormat' => 'path',
-             'showScriptName' => false,
-             'enablePrettyUrl' => true,
-             'rules' => [
-                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-             ],
-         ]
+        'urlManager' => [
+            //'urlFormat' => 'path',
+            'showScriptName' => false,
+            'enablePrettyUrl' => true,
+            'rules' => [
+                [
+                    'pattern' => 'array/generate/<N:\d+>/<min:\d+>/<max:\d+>',
+                    'route' => 'array/index',
+//                    'defaults' => ['min' => 1, 'max' => 999],
+                ],
+                'array/sum/<arr>' => 'array/sum',
+                'array/edit/<arr>/<power:\d+>' => 'array/edit',
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+            ],
+        ]
     ],
     'params' => $params,
 ];

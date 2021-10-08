@@ -3,6 +3,7 @@
 /* @var $this View */
 
 use yii\bootstrap4\Html;
+use yii\helpers\Url;
 use yii\web\View;
 
 ?>
@@ -16,7 +17,8 @@ use yii\web\View;
                     </div>
                     <div class="shop-body">
                         <h3>Laptop<br>Collection</h3>
-                        <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a></div>
+                        <?= Html::a('Shop now <i class="fa fa-arrow-circle-right"></i>', Url::to("/store/product"), ['class' => 'cta-btn']) ?>
+                    </div>
                 </div>
             </div>
             <div class="col-md-4 col-xs-6">
@@ -25,7 +27,7 @@ use yii\web\View;
                         <?= Html::img("@storeImg/xshop03.png") ?>
                     </div>
                     <div class="shop-body"><h3>Accessories<br>Collection</h3>
-                        <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                        <?= Html::a('Shop now <i class="fa fa-arrow-circle-right"></i>', Url::to("/store/product"), ['class' => 'cta-btn']) ?>
                     </div>
                 </div>
             </div>
@@ -36,7 +38,7 @@ use yii\web\View;
                     </div>
                     <div class="shop-body">
                         <h3>Cameras<br>Collection</h3>
-                        <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+                        <?= Html::a('Shop now <i class="fa fa-arrow-circle-right"></i>', Url::to("/store/product"), ['class' => 'cta-btn']) ?>
                     </div>
                 </div>
             </div>
@@ -51,10 +53,10 @@ use yii\web\View;
                     <h3 class="title">New Products</h3>
                     <div class="section-nav">
                         <ul class="section-tab-nav tab-nav">
-                            <li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
-                            <li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
-                            <li><a data-toggle="tab" href="#tab1">Cameras</a></li>
-                            <li><a data-toggle="tab" href="#tab1">Accessories</a></li>
+                            <li class="active"><?= Html::a("Laptops", Url::to("#tab1"), ['data-toggle' => 'tab']) ?></li>
+                            <li><?= Html::a("Smartphones", Url::to("#tab1"), ['data-toggle' => 'tab']) ?></li>
+                            <li><?= Html::a("Cameras", Url::to("#tab1"), ['data-toggle' => 'tab']) ?></li>
+                            <li><?= Html::a("Accessories", Url::to("#tab1"), ['data-toggle' => 'tab']) ?></li>
                         </ul>
                     </div>
                 </div>
@@ -74,7 +76,7 @@ use yii\web\View;
                                     </div>
                                     <div class="product-body">
                                         <p class="product-category">Category</p>
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                        <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                         <h4 class="product-price">$980.00
                                             <del class="product-old-price">$990.00</del>
                                         </h4>
@@ -103,7 +105,7 @@ use yii\web\View;
                                         <div class="product-label"><span class="new">NEW</span></div>
                                     </div>
                                     <div class="product-body"><p class="product-category">Category</p>
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                        <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                         <h4 class="product-price">$980.00
                                             <del class="product-old-price">$990.00</del>
                                         </h4>
@@ -130,7 +132,7 @@ use yii\web\View;
                                         <div class="product-label"><span class="sale">-30%</span></div>
                                     </div>
                                     <div class="product-body"><p class="product-category">Category</p>
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                        <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                         <h4 class="product-price">$980.00
                                             <del class="product-old-price">$990.00</del>
                                         </h4>
@@ -152,7 +154,7 @@ use yii\web\View;
                                 <div class="product">
                                     <div class="product-img"> <?= Html::img("@storeImg/xproduct04.png") ?> </div>
                                     <div class="product-body"><p class="product-category">Category</p>
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                        <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                         <h4 class="product-price">$980.00
                                             <del class="product-old-price">$990.00</del>
                                         </h4>
@@ -176,7 +178,7 @@ use yii\web\View;
                                 <div class="product">
                                     <div class="product-img"> <?= Html::img("@storeImg/xproduct05.png") ?> </div>
                                     <div class="product-body"><p class="product-category">Category</p>
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                        <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                         <h4 class="product-price">$980.00
                                             <del class="product-old-price">$990.00</del>
                                         </h4>
@@ -226,8 +228,9 @@ use yii\web\View;
                         </li>
                     </ul>
                     <h2 class="text-uppercase">hot deal this week</h2>
-                    <p>New Collection Up to 50% OFF</p> <a class="primary-btn cta-btn" href="#">Shop
-                        now</a></div>
+                    <p>New Collection Up to 50% OFF</p>
+                    <?= Html::a("Shop now", Url::toRoute(["product"]), ['class' => 'primary-btn cta-btn']) ?>
+                </div>
             </div>
         </div>
     </div>
@@ -239,10 +242,10 @@ use yii\web\View;
                 <div class="section-title"><h3 class="title">Top selling</h3>
                     <div class="section-nav">
                         <ul class="section-tab-nav tab-nav">
-                            <li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
-                            <li><a data-toggle="tab" href="#tab2">Smartphones</a></li>
-                            <li><a data-toggle="tab" href="#tab2">Cameras</a></li>
-                            <li><a data-toggle="tab" href="#tab2">Accessories</a></li>
+                            <li class="active"><?= Html::a("Laptops", Url::to("#tab2"), ['data-toggle' => 'tab']) ?></li>
+                            <li><?= Html::a("Smartphones", Url::to("#tab2"), ['data-toggle' => 'tab']) ?></li>
+                            <li><?= Html::a("Cameras", Url::to("#tab2"), ['data-toggle' => 'tab']) ?></li>
+                            <li><?= Html::a("Accessories", Url::to("#tab2"), ['data-toggle' => 'tab']) ?></li>
                         </ul>
                     </div>
                 </div>
@@ -258,7 +261,7 @@ use yii\web\View;
                                                     class="new">NEW</span></div>
                                     </div>
                                     <div class="product-body"><p class="product-category">Category</p>
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                        <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                         <h4 class="product-price">$980.00
                                             <del class="product-old-price">$990.00</del>
                                         </h4>
@@ -284,7 +287,7 @@ use yii\web\View;
                                         <div class="product-label"><span class="new">NEW</span></div>
                                     </div>
                                     <div class="product-body"><p class="product-category">Category</p>
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                        <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                         <h4 class="product-price">$980.00
                                             <del class="product-old-price">$990.00</del>
                                         </h4>
@@ -310,7 +313,7 @@ use yii\web\View;
                                         <div class="product-label"><span class="sale">-30%</span></div>
                                     </div>
                                     <div class="product-body"><p class="product-category">Category</p>
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                        <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                         <h4 class="product-price">$980.00
                                             <del class="product-old-price">$990.00</del>
                                         </h4>
@@ -332,7 +335,7 @@ use yii\web\View;
                                 <div class="product">
                                     <div class="product-img"> <?= Html::img("@storeImg/xproduct09.png") ?> </div>
                                     <div class="product-body"><p class="product-category">Category</p>
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                        <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                         <h4 class="product-price">$980.00
                                             <del class="product-old-price">$990.00</del>
                                         </h4>
@@ -356,7 +359,7 @@ use yii\web\View;
                                 <div class="product">
                                     <div class="product-img"> <?= Html::img("@storeImg/xproduct01.png") ?> </div>
                                     <div class="product-body"><p class="product-category">Category</p>
-                                        <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                        <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                         <h4 class="product-price">$980.00
                                             <del class="product-old-price">$990.00</del>
                                         </h4>
@@ -400,7 +403,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct07.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
@@ -409,7 +412,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct08.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
@@ -418,7 +421,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct09.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
@@ -429,7 +432,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct01.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
@@ -438,7 +441,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct02.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
@@ -447,7 +450,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct03.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
@@ -467,7 +470,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct04.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
@@ -476,7 +479,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct05.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
@@ -485,7 +488,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct06.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
@@ -496,7 +499,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct07.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
@@ -505,7 +508,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct08.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
@@ -514,7 +517,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct09.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
@@ -535,7 +538,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct01.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
@@ -544,7 +547,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct02.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
@@ -553,7 +556,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct03.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
@@ -564,7 +567,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct04.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
@@ -573,7 +576,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct05.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
@@ -582,7 +585,7 @@ use yii\web\View;
                         <div class="product-widget">
                             <div class="product-img"> <?= Html::img("@storeImg/xproduct06.png") ?> </div>
                             <div class="product-body"><p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                <h3 class="product-name"><?= Html::a("product name goes here", Url::toRoute(["product"])) ?></h3>
                                 <h4 class="product-price">$980.00
                                     <del class="product-old-price">$990.00</del>
                                 </h4>
