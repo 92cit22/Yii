@@ -10,6 +10,7 @@ use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
+use yii\helpers\Url;
 use yii\web\View;
 
 AppAsset::register($this);
@@ -55,7 +56,8 @@ AppAsset::register($this);
                 . '</li>'
             ),
             ['label' => 'Store', 'url' => ['/store/']],
-            ['label' => 'Array', 'url' => ['/array/generate/5']],
+            ['label' => 'Array', 'url' => Url::toRoute(['array/index', 'N' => 5])],
+            ['label' => 'User', 'url' => Url::toRoute(['user/add'])],
         ],
     ]);
     NavBar::end();
