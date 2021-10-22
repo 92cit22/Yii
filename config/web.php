@@ -48,11 +48,8 @@ $config = [
             'showScriptName' => false,
             'enablePrettyUrl' => true,
             'rules' => [
-                [
-                    'pattern' => 'array/generate/<N:\d+>/<min:\d+>/<max:\d+>',
-                    'route' => 'array/index',
-//                    'defaults' => ['min' => 1, 'max' => 999],
-                ],
+                'array/generate/<N:\d+>/<min:\d+>/<max:\d+>' => 'array/index',
+                'array/generate/<N:\d+>' => 'array/index',
                 'array/sum/<arr>' => 'array/sum',
                 'array/edit/<arr>/<power:\d+>' => 'array/edit',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
