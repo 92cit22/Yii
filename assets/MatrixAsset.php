@@ -7,7 +7,7 @@ use yii\web\AssetBundle;
 class MatrixAsset extends AssetBundle
 {
     public $basePath = '@webroot';
-    public $baseUrl = '@web';
+    public $baseUrl = '@web/web';
     public $css = [
         'css/matrix.css',
     ];

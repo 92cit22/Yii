@@ -6,6 +6,7 @@
 
 use app\assets\MatrixAsset;
 use yii\bootstrap4\Html;
+use yii\helpers\Url;
 
 MatrixAsset::register($this);
 ?>
@@ -24,7 +25,7 @@ MatrixAsset::register($this);
 
 <header>
     <div>
-    <span class="square-matrix">Ma</span><span>trix</span>
+    <?= Html::a('<span class="square-matrix">Ma</span><span>trix</span>', Url::toRoute(['/'])) ?>
     </div>
 </header>
 
