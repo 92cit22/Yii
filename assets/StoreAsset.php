@@ -7,7 +7,7 @@ use yii\web\AssetBundle;
 class StoreAsset extends AssetBundle
 {
     public $basePath = '@webroot';
-    public $baseUrl = '@web';
+    public $baseUrl = '@web/web';
     public $css = [
         'css/store.css',
         'css/bootstrap.css',
