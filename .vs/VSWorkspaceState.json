@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\controllers",
+    "\\models",
+    "\\views",
+    "\\views\\layouts",
+    "\\views\\matrix",
+    "\\web",
+    "\\web\\css"
+  ],
+  "PreviewInSolutionExplorer": false
+}

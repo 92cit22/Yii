@@ -58,6 +58,7 @@ AppAsset::register($this);
             ['label' => 'Store', 'url' => ['/store/']],
             ['label' => 'Array', 'url' => Url::toRoute(['array/index', 'N' => 5])],
             ['label' => 'User', 'url' => Url::toRoute(['user/add'])],
+            ['label'=>'Matrix', 'url'=> Url::toRoute(['matrix/index'])],
         ],
     ]);
     NavBar::end();
