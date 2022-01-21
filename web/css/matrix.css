@@ -1,0 +1,44 @@
+*{
+    font-family: 'Roboto Slab';
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+
+}
+p { margin: 5px 0 10px 0; }
+
+body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    text-align: center;
+}
+header{
+    font-size: 48pt;
+    background-color: #D4A152;
+    border-bottom: solid 3px #FF0305;
+    padding: 10px;
+}
+.square-matrix{
+    background-color: #927FFD;
+    padding: 10px 0px 10px 10px;
+}
+.field-row  {
+    display: flex;
+    justify-content: space-around;
+    margin: 1rem 40vw;
+}
+.field-row .form-group{
+    display: inline-block;
+}
+.field-row .form-control{
+    width: 90px;
+}
+.btn-submit{
+    margin-top: 2rem;
+    border: 0px;
+    border-radius: 5px;
+    padding: 0.5em 1em;
+    background-color: #D4A152;
+}
