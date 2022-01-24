@@ -4,6 +4,13 @@ var ElemBuilder = /** @class */ (function () {
         this.currentElement = element !== null ? element : document.body;
         this.style = this.currentElement.style;
     }
+    Object.defineProperty(ElemBuilder.prototype, "element", {
+        get: function () {
+            return this.currentElement;
+        },
+        enumerable: false,
+        configurable: true
+    });
     Object.defineProperty(ElemBuilder.prototype, "height", {
         get: function () {
             return this.style.height;
@@ -18,11 +25,22 @@ var ElemBuilder = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    ElemBuilder.prototype.createSubElement = function (tag) {
-        var elem = document.createElement(tag);
-        elem.style.margin = this.currentElement.style.margin;
+    ElemBuilder.prototype.appendNewElement = function (tag) {
+        this.appendElement(this.createSubElement(tag));
+        return this.subBuilder;
+    };
+    ElemBuilder.prototype.appendElement = function (elem) {
         this.subBuilder = new ElemBuilder(elem);
         this.currentElement.appendChild(elem);
+        return this.subBuilder;
+    };
+    ElemBuilder.prototype.prependNewElement = function (tag) {
+        this.prependElement(this.createSubElement(tag));
+        return this.subBuilder;
+    };
+    ElemBuilder.prototype.prependElement = function (elem) {
+        this.subBuilder = new ElemBuilder(elem);
+        this.currentElement.prepend(elem);
         return this.subBuilder;
     };
     ElemBuilder.prototype.append = function (elem) {
@@ -45,68 +63,162 @@ var ElemBuilder = /** @class */ (function () {
         this.style.setProperty(property, value, priority);
         return this;
     };
+    ElemBuilder.prototype.addClass = function (className) {
+        this.currentElement.classList.add(className);
+        return this;
+    };
+    ElemBuilder.prototype.appendElemSize = function () {
+        this.appendNewElement('p').append("Cell size " + this.width + "*" + this.height);
+        return this;
+    };
+    ElemBuilder.prototype.setEmpty = function () {
+        return this.addClass("empty")
+            .setStyle('color', 'black')
+            .setStyle('background-color', 'white')
+            .appendNewElement('p')
+            .append('empty cell size 900px*30px');
+    };
+    ElemBuilder.prototype.createSubElement = function (tag) {
+        var elem = document.createElement(tag);
+        this.addEvents(elem);
+        this.subBuilder = new ElemBuilder(elem);
+        return elem;
+    };
+    ElemBuilder.prototype.addEvents = function (elem) {
+        switch (elem.tagName) {
+            case 'P':
+                elem.onmouseenter = function (event) {
+                    switchColor(event.target);
+                };
+                elem.onmouseleave = function (event) {
+                    switchColor(event.target);
+                };
+                break;
+            case 'DIV':
+                elem.onclick = function (event) {
+                    switchPreviousSibling(event.currentTarget);
+                };
+                elem.ondblclick = function (event) {
+                    switchNextSibling(event.currentTarget);
+                };
+                break;
+            default:
+        }
+    };
     return ElemBuilder;
 }());
+function switchPreviousSibling(element) {
+    var sibling = element.previousElementSibling.previousElementSibling;
+    if (sibling === null)
+        sibling = element.parentElement.lastElementChild;
+    switchSibling(element, sibling);
+}
+function switchNextSibling(element) {
+    var _a;
+    var sibling = (_a = element.nextElementSibling) === null || _a === void 0 ? void 0 : _a.nextElementSibling;
+    if (sibling === null || sibling === undefined)
+        sibling = element.parentElement.firstElementChild.nextElementSibling;
+    switchSibling(element, sibling);
+}
+function switchSibling(element, sibling) {
+    var children = element.children;
+    var sibChildren = sibling.children;
+    for (var j = children.length; j > 0; j--) {
+        var sib = sibChildren[0].cloneNode(true);
+        sib.onmouseenter = function (event) {
+            switchColor(event.target);
+        };
+        sib.onmouseleave = function (event) {
+            switchColor(event.target);
+        };
+        element.append(sib);
+        sibChildren[0].remove();
+        var elem = children[0].cloneNode(true);
+        elem.onmouseenter = function (event) {
+            switchColor(event.target);
+        };
+        elem.onmouseleave = function (event) {
+            switchColor(event.target);
+        };
+        sibling.append(elem);
+        children[0].remove();
+    }
+}
+function switchColor(element) {
+    var col = element.parentElement.style.color;
+    element.parentElement.style.color = element.parentElement.style.backgroundColor;
+    element.parentElement.style.backgroundColor = col;
+}
 var body = new ElemBuilder();
-body.setHeight("98vh");
 body.style.textAlign = "center";
 body.style.verticalAlign = "middle";
 body.style.fontSize = "16pt";
 body.style.margin = "auto";
-body.style.paddingTop = "2vh";
-var header = body.createSubElement('div');
-header.setHeight("10%")
-    .setWidth("90%")
+body.element.innerHTML = "";
+var styles = body.appendNewElement("style");
+styles.append("\np{\n    width:max-content;\n    margin: auto;\n}\ndiv{\n    margin: auto;\n    box-sizing: border-box;\n}\n.empty{\n}\n.rotate > p{\n    transform: rotate(90deg);\n    transform-origin: left bottom;\n    margin: 30px 0;\n}\n");
+var header = body.appendNewElement('div');
+header.setHeight("125px")
     .setBorder()
-    .createSubElement('p')
-    .append('Header');
-var subHeader = body.createSubElement('div');
-subHeader.setHeight("5%")
-    .setWidth("90%")
-    .createSubElement('p')
-    .append('SubHeader');
-var nav = body.createSubElement('div');
-nav.setHeight("10%")
-    .setWidth("90%")
+    .setWidth("900px")
+    .setStyle("color", "red")
+    .appendElemSize()
+    .prependNewElement('p')
+    .append("Header")
+    .appendNewElement("br");
+var subHeader = body.appendNewElement('div');
+subHeader.setHeight("30px")
+    .setWidth("900px")
+    .setEmpty();
+var horizontal = body.appendNewElement('div');
+horizontal.setHeight("35px")
     .setBorder()
-    .createSubElement('p')
-    .append('Navigation bar');
-var subNav = body.createSubElement('div');
-subNav.setHeight("5%")
-    .createSubElement('p')
-    .append('Sub Nav');
-var composeHeight = "50%";
-var main = body.createSubElement('div');
+    .setWidth("900px")
+    .setStyle("color", "blue")
+    .appendElemSize()
+    .prependNewElement('p')
+    .append("Horizontal menu")
+    .appendNewElement("br");
+var subNav = body.appendNewElement('div');
+subNav.setHeight("30px")
+    .setWidth("900px")
+    .setStyle('backgroundColor', 'white')
+    .setEmpty();
+var composeHeight = "500px";
+var main = body.appendNewElement('div');
 main.setHeight(composeHeight)
-    .setWidth("66%")
+    .setWidth("612px")
     .setStyle('display', 'inline-block')
+    .setStyle('color', 'green')
     .setBorder()
-    .createSubElement('p')
+    .appendElemSize()
+    .prependNewElement('p')
     .append('Main menu');
-var subMain = body.createSubElement('div');
+var subMain = body.appendNewElement('div');
 subMain.setHeight(composeHeight)
+    .setWidth("30px")
     .setStyle('display', 'inline-block')
-    .setBorder()
-    .createSubElement('p')
-    .setStyle("transform", "rotate(90deg) translateX(40px)")
-    .setStyle("overflow-wrap", "unset")
-    .append('Sub main');
-var side = body.createSubElement('div');
+    .addClass("rotate")
+    .setEmpty();
+var side = body.appendNewElement('div');
 side.setHeight(composeHeight)
-    .setWidth("20%")
+    .setWidth("266px")
     .setStyle('display', 'inline-block')
+    .setStyle('color', 'blue')
     .setBorder()
-    .createSubElement('p')
+    .appendElemSize()
+    .prependNewElement('p')
     .append('Side bar');
-var subCompose = body.createSubElement('div');
-subCompose.setHeight("5%")
-    .setWidth("90%")
-    .createSubElement('p')
-    .append('Sub compose');
-var footer = body.createSubElement('div');
-footer.setHeight("10%")
-    .setWidth("90%")
+var subCompose = body.appendNewElement('div');
+subCompose.setHeight("30px")
+    .setWidth("900px")
+    .setEmpty();
+var footer = body.appendNewElement('div');
+footer.setHeight("190px")
     .setBorder()
-    .createSubElement("p")
+    .setWidth("900px")
+    .setStyle("color", "red")
+    .appendElemSize()
+    .prependNewElement('p')
     .append("Footer");
 //# sourceMappingURL=15.js.map
