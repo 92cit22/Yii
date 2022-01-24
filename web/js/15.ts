@@ -118,20 +118,34 @@ function switchPreviousSibling(element: HTMLElement) {
         sibling = element.parentElement.lastElementChild as HTMLElement
     switchSibling(element, sibling);
 }
-function switchNextSibling(element: HTMLElement) {
-    let sibling = element.nextElementSibling.nextElementSibling as HTMLElement;
-    if (sibling === null)
-        sibling = element.parentElement.firstElementChild as HTMLElement
+function switchNextSibling(element) {
+    var sibling = element.nextElementSibling?.nextElementSibling;
+    if (sibling === null || sibling === undefined)
+        sibling = element.parentElement.firstElementChild.nextElementSibling;
     switchSibling(element, sibling);
 }
 function switchSibling(element: HTMLElement, sibling: HTMLElement) {
     let children = element.children;
     let sibChildren = sibling.children;
     for (var j = children.length; j > 0; j--) {
-        element.append(sibChildren[0].cloneNode(true))
-        sibChildren[0].remove()
-        sibling.append(children[0].cloneNode(true))
-        children[0].remove()
+    	let sib = sibChildren[0].cloneNode(true) as HTMLElement;
+        sib.onmouseenter = function (event) {
+            switchColor(event.target as HTMLElement);
+        };
+        sib.onmouseleave = function (event) {
+            switchColor(event.target as HTMLElement);
+        };
+        element.append(sib);
+        sibChildren[0].remove();
+        let elem = children[0].cloneNode(true) as HTMLElement;
+        elem.onmouseenter = function (event) {
+            switchColor(event.target as HTMLElement);
+        };
+        elem.onmouseleave = function (event) {
+            switchColor(event.target as HTMLElement);
+        };
+        sibling.append(elem);
+        children[0].remove();
     }
 }
 function switchColor(element: HTMLElement) {

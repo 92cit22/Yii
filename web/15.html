@@ -123,18 +123,33 @@
             switchSibling(element, sibling);
         }
         function switchNextSibling(element) {
-            var sibling = element.nextElementSibling.nextElementSibling;
-            if (sibling === null)
-                sibling = element.parentElement.firstElementChild;
+            var _a;
+            var sibling = (_a = element.nextElementSibling) === null || _a === void 0 ? void 0 : _a.nextElementSibling;
+            if (sibling === null || sibling === undefined)
+                sibling = element.parentElement.firstElementChild.nextElementSibling;
             switchSibling(element, sibling);
         }
         function switchSibling(element, sibling) {
             var children = element.children;
             var sibChildren = sibling.children;
             for (var j = children.length; j > 0; j--) {
-                element.append(sibChildren[0].cloneNode(true));
+                var sib = sibChildren[0].cloneNode(true);
+                sib.onmouseenter = function (event) {
+                    switchColor(event.target);
+                };
+                sib.onmouseleave = function (event) {
+                    switchColor(event.target);
+                };
+                element.append(sib);
                 sibChildren[0].remove();
-                sibling.append(children[0].cloneNode(true));
+                var elem = children[0].cloneNode(true);
+                elem.onmouseenter = function (event) {
+                    switchColor(event.target);
+                };
+                elem.onmouseleave = function (event) {
+                    switchColor(event.target);
+                };
+                sibling.append(elem);
                 children[0].remove();
             }
         }
