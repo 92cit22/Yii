@@ -10,25 +10,27 @@ use yii\widgets\ActiveForm;
 ?>
 
 <?php $form = ActiveForm::begin([
-        'action'=>['matrix/generate'],
-        'fieldConfig' => [
-            'template' => "{label}\n{input}\n{error}",
-            'labelOptions' => ['class' => 'col-lg-1 col-form-label mr-lg-3'],
-            'inputOptions' => ['class' => 'col-lg-3 form-control'],
-            'errorOptions' => ['class' => 'col-lg-8 invalid-feedback'],
-        ],
-    ]); ?>
+    'action' => ['matrix/generate'],
+    'fieldConfig' => [
+        'template' => "{label}\n{input}\n{error}",
+        'labelOptions' => ['class' => 'col-lg-1 col-form-label mr-lg-3'],
+        'inputOptions' => ['class' => 'col-lg-3 form-control'],
+        'errorOptions' => ['class' => 'col-lg-8 invalid-feedback'],
+    ],
+]); ?>
 
-    <h4>Размер</h4>
-    <div class="field-row center">
-        <?= $form->field($model, 'rows')->input('number', ['placeholder' => 'Строк'])->label('') ?>
-        <?= $form->field($model, 'columns')->input('number', ['placeholder' => 'Столбцов'])->label('') ?>
-    </div>
+<h4>Размер</h4>
+<div class="field-row center">
+    <?= $form->field($model, 'rows')->input('number', ['placeholder' => 'Строк'])->label('') ?>
+    <?= $form->field($model, 'columns')->input('number', ['placeholder' => 'Столбцов'])->label('') ?>
+</div>
 
-    <h4>Значения</h4>
-    <div class="field-row center">
-        <?= $form->field($model, 'min')->input('number', ['placeholder' => 'min'])->label('') ?>
-        <?= $form->field($model, 'max')->input('number', ['placeholder' => 'max'])->label('') ?>
-    </div>
+<h4>Значения</h4>
+<div class="field-row center">
+    <?= $form->field($model, 'min')->input('number', ['placeholder' => 'min'])->label('') ?>
+    <?= $form->field($model, 'max')->input('number', ['placeholder' => 'max'])->label('') ?>
+</div>
+<h4>Типы</h4>
+<?= $form->field($model, 'type')->radioList([1 => 'Обычная', 2 => 'Нижнетреугольная', 3 => 'Верхнетреугольная'], ['separator' => '<br>'])->label('') ?>
 <?= Html::submitButton('Создать', ['class' => 'btn-submit']) ?>
 <?php ActiveForm::end(); ?>
