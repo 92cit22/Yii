@@ -5,8 +5,6 @@
 
 use app\models\Personal;
 
-// $model = [new Personal()];
-
 use yii\bootstrap4\Html;
 use yii\helpers\Url;
 
