@@ -7,8 +7,8 @@ use yii\base\Model;
 
 class UserForm extends Model
 {
-    public string $LastName = '';
     public string $FirstName = '';
+    public string $LastName = '';
     public string $MiddleName = '';
     public string $Series = '';
     public string $PassId = '';
@@ -20,8 +20,8 @@ class UserForm extends Model
     public function attributeLabels(): array
     {
         return [
-            'LastName' => 'Фамилия',
             'FirstName' => 'Имя',
+            'LastName' => 'Фамилия',
             'MiddleName' => 'Отчество',
             'Series' => 'Серия паспорта',
             'PassId' => 'Номер паспорта',
