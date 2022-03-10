@@ -1,4 +1,5 @@
 <?php
+define("Upload", "web/upload/");
 function formatPrint($var)
 {
     return '<pre>' . print_r($var, true) . '</pre>';
