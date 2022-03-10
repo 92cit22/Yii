@@ -2,38 +2,67 @@
 
 namespace app\models;
 
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
+use Yii;
+use yii\web\UploadedFile;
+
+/**
+ * This is the model class for table "User".
+ *
+ * @property int $Id
+ * @property string $Username
+ * @property string $Password
+ * @property string $Email
+ * @property string $FIO
+ * @property int $Avatar
+ * @property string $AuthKey
+ * @property string $AccessToken
+ */
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
+    public $confirmPassword;
+    public $myAvatar;
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'User';
+    }
 
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['Username', 'Password', 'Email', 'FIO', 'myAvatar'], 'required'],
+            [['Username', 'Password', 'Email', 'FIO',], 'string'],
+            ['confirmPassword', 'compare', 'compareAttribute' => 'Password', 'message' => 'Пароли не совпадают'],
+        ];
+    }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'Username' => 'Логин',
+            'Password' => 'Пароль',
+            'confirmPassword' => 'Повторите пароль',
+            'Email' => 'Адрес электронной почты',
+            'FIO' => 'ФИО',
+            'myAvatar' => 'Изображение профиля',
+        ];
+    }
 
     /**
      * {@inheritdoc}
      */
     public static function findIdentity($id)
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        $cond = ['Id' => $id];
+        return self::FindBy($cond);
     }
 
     /**
@@ -41,13 +70,8 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        $cond = ['AccessToken' => $token];
+        return self::FindBy($cond);
     }
 
     /**
@@ -58,13 +82,13 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        $cond = ['Username' => $username];
+        return self::FindBy($cond);
+    }
+    public static function FindBy(array $cond)
+    {
+        $query = self::findOne($cond);
+        return ($query !== null) ? new static($query) : null;
     }
 
     /**
@@ -72,7 +96,11 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->Id;
+    }
+    public function getUsername()
+    {
+        return $this->Username;
     }
 
     /**
@@ -80,7 +108,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return $this->AuthKey;
     }
 
     /**
@@ -88,9 +116,27 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public function validateAuthKey($authKey)
     {
-        return $this->authKey === $authKey;
+        return $this->AuthKey === $authKey;
     }
 
+    public function saveData()
+    {
+        $this->myAvatar = UploadedFile::getInstances($this, 'myAvatar');
+        if ($this->validate()) {
+            // echo "valid";
+            // die();
+            $this->Password = md5($this->Password);
+            $temp_name = time() . '_user.' . $this->myAvatar[0]->extension;
+            if (!empty($this->myAvatar)) {
+                if ($this->myAvatar[0]->saveAs(Upload . $temp_name))
+                    $this->Avatar = $temp_name;
+            } else
+                $this->Avatar = 'default.jpg';
+            $this->save(false);
+            return true;
+        } else
+            return false;
+    }
     /**
      * Validates password
      *
@@ -99,6 +145,6 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        return $this->Password === md5($password);
     }
 }

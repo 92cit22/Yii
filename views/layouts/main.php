@@ -45,7 +45,14 @@ AppAsset::register($this);
 				['label' => 'Home', 'url' => ['/site/index']],
 				['label' => 'About', 'url' => ['/site/about']],
 				['label' => 'Contact', 'url' => ['/site/contact']],
-				Yii::$app->user->isGuest ? (['label' => 'Login', 'url' => ['/site/login']]
+				['label' => 'Store', 'url' => ['/store/']],
+				['label' => 'Array', 'url' => Url::toRoute(['array/index', 'N' => 5])],
+				['label' => 'User', 'url' => Url::toRoute(['user/add'])],
+				['label' => 'Matrix', 'url' => Url::toRoute(['matrix/index'])],
+				['label' => 'Personal', 'url' => Url::toRoute(['personal/index'])],
+				['label' => 'Pr8', 'url' => Url::toRoute(['pr8/index'])],
+				Yii::$app->user->isGuest ? ('<li class="nav-item">' . Html::a("Login", Url::toRoute(['/site/login']), ['class' => 'nav-link']) . '</li>'
+					. '<li class="nav-item">' . Html::a("Registration", Url::toRoute(['/site/registration']), ['class' => 'nav-link']) . '</li>'
 				) : ('<li>'
 					. Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
 					. Html::submitButton(
@@ -55,12 +62,6 @@ AppAsset::register($this);
 					. Html::endForm()
 					. '</li>'
 				),
-				['label' => 'Store', 'url' => ['/store/']],
-				['label' => 'Array', 'url' => Url::toRoute(['array/index', 'N' => 5])],
-				['label' => 'User', 'url' => Url::toRoute(['user/add'])],
-				['label' => 'Matrix', 'url' => Url::toRoute(['matrix/index'])],
-				['label' => 'Personal', 'url' => Url::toRoute(['personal/index'])],
-				['label' => 'Pr8', 'url' => Url::toRoute(['pr8/index'])],
 			],
 		]);
 		NavBar::end();
