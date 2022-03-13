@@ -45,6 +45,11 @@ class PersonalController extends \yii\web\Controller
     {
         if (!$model = Personal::findOne($id))
             return $this->render('error', ['message' => 'Запись не найдена']);
+
+        if ($model->load(Yii::$app->request->post()) && $model->Check == true)
+            //    if ($model->validate())
+            if ($model->save())
+                return $this->redirect('/personal');
         return $this->render('add', compact('model'));
     }
 }

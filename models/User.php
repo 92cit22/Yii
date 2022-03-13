@@ -37,6 +37,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             [['Username', 'Password', 'Email', 'FIO', 'myAvatar'], 'required'],
             [['Username', 'Password', 'Email', 'FIO',], 'string'],
+            [['Email'], 'email'],
             ['confirmPassword', 'compare', 'compareAttribute' => 'Password', 'message' => 'Пароли не совпадают'],
         ];
     }

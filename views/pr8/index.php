@@ -26,15 +26,16 @@ $this->title = 'Данные товаров';
             <tr>
                 <td><?= $value['Name'] ?></td>
                 <td><?= $value['Description'] ?></td>
-                <td><a href="<?= $value['Picture'] ?>"><?= str_replace(Upload, '', $value['Picture']) ?></a></td>
+                <td><?= Html::img("/" . $value['Picture'], ['width' => 150]) ?></td>
+                <!-- <td><a href="<?= $value['Picture'] ?>"><?= (Upload . $value['Picture']) ?></a></td> -->
                 <td><?= $value['category']['Name'] ?></td>
                 <td>
                     <?php
                     foreach ($value['files'] as $key => $file)
                         if ($key != 0)
-                            echo '<br><a href="' . $file['Url'] . '">' . str_replace(Upload, '', $file['Url']) . '</a>';
+                            echo '<br><a href="/' . $file['Url'] . '">' . $file['Url'] . '</a>';
                         else
-                            echo '<a href="' . $file['Url'] . '">' . str_replace(Upload, '', $file['Url']) . '</a>';
+                            echo '<a href="/' . $file['Url'] . '">' .  $file['Url'] . '</a>';
                     ?>
                 </td>
             </tr>

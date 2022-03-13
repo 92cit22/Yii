@@ -41,6 +41,7 @@ class Product extends \yii\db\ActiveRecord
 			[['CategoryId'], 'integer'],
 			[['CategoryId'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['CategoryId' => 'Id']],
 			[['myPicture'], 'image', 'extensions' => ['png', 'jpg']],
+			[['myPicture'], 'image', 'maxSize' => 2 * 1024 * 1024,],
 			[['myFiles'], 'file', 'maxFiles' => 5],
 		];
 	}
