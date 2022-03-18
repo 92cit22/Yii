@@ -18,11 +18,11 @@ class RbacController extends \yii\web\Controller
         $updateCat->description = 'Update a category product';
         $auth->add($updateCat);
 
-        $editor = $auth->createRole('editor');
+        $editor = $auth->createRole('Redactor');
         $auth->add($editor);
         $auth->addChild($editor, $createCat);
 
-        $admin = $auth->createRole('administrator');
+        $admin = $auth->createRole('Adminictrator');
         $auth->add($admin);
         $auth->addChild($admin, $updateCat);
         $auth->addChild($admin, $editor);

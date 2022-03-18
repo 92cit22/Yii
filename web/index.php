@@ -1,8 +1,11 @@
 <?php
 define("Upload", "web/upload/");
-function formatPrint($var)
+function formatPrint($var, bool $return = true)
 {
-    return '<pre>' . print_r($var, true) . '</pre>';
+    $res = '<pre>' . print_r($var, true) . '</pre>';
+    if ($return)
+        return $res;
+    echo $res;
 }
 // comment out the following two lines when deployed to production
 defined('YII_DEBUG') or define('YII_DEBUG', true);
